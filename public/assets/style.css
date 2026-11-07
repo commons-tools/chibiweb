@@ -47,6 +47,7 @@ body {
   overflow-wrap: anywhere;
 }
 img { max-width: 100%; height: auto; }
+body { overflow-x: clip; }   /* 横幅いっぱいの部品で横スクロールが出ないように */
 a { color: var(--c-accent); text-underline-offset: 0.2em; }
 :focus-visible { outline: 2px solid var(--c-accent); outline-offset: 2px; }
 .sh-open { overflow: hidden; }
@@ -141,9 +142,21 @@ site-footer { display: block; min-height: 64px; margin-top: calc(var(--space) * 
   .info-list > div { display: grid; grid-template-columns: 9em 1fr; gap: var(--space); }
 }
 
-/* 地図（Googleマップの埋め込み）：横幅いっぱい、4:3を保つ */
-.map { margin-top: calc(var(--space) * 1.5); border-radius: var(--radius); overflow: hidden; background: var(--c-surface); }
-.map iframe { display: block; width: 100%; aspect-ratio: 4 / 3; border: 0; }
+/* 地図（Googleマップの埋め込み）
+   - 本文の幅を飛び出して、画面の端から端まで
+   - モノクロのフィルターで、サイトの色を邪魔しない落ち着いた地図に（APIキー不要） */
+.map {
+  width: 100vw;
+  margin: calc(var(--space) * 1.5) 0 0 calc(50% - 50vw);
+  background: var(--c-surface);
+}
+.map iframe {
+  display: block; width: 100%; aspect-ratio: 4 / 3; border: 0;
+  filter: grayscale(1) contrast(0.92) brightness(1.04);
+}
+@media (min-width: 45rem) {
+  .map iframe { aspect-ratio: 21 / 9; max-height: 60vh; }
+}
 
 /* 注意書きの箱 */
 .note { padding: var(--space) calc(var(--space) * 1.25); background: var(--c-accent-soft); border-radius: var(--radius); }
