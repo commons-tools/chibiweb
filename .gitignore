@@ -1,0 +1,12 @@
+# Mac
+.DS_Store
+
+# 管理画面のパスワード（サーバーごとに作られる。共有しない）
+public/news/data/.auth.php
+
+# 削除したお知らせ
+public/news/data/_trash/
+
+# 写真の元データ（重いので入れない。README.txt だけ残す）
+photos/*
+!photos/README.txt

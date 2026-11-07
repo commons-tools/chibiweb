@@ -1,0 +1,2 @@
+# データフォルダは直接見せない（APIを通して読む）
+Require all denied
