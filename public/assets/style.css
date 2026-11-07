@@ -143,8 +143,7 @@ site-footer { display: block; min-height: 64px; margin-top: calc(var(--space) * 
 }
 
 /* 地図（Googleマップの埋め込み）
-   - 本文の幅を飛び出して、画面の端から端まで
-   - モノクロのフィルターで、サイトの色を邪魔しない落ち着いた地図に（APIキー不要） */
+   - 本文の幅を飛び出して、画面の端から端まで */
 .map {
   width: 100vw;
   margin: calc(var(--space) * 1.5) 0 0 calc(50% - 50vw);
@@ -152,7 +151,6 @@ site-footer { display: block; min-height: 64px; margin-top: calc(var(--space) * 
 }
 .map iframe {
   display: block; width: 100%; aspect-ratio: 4 / 3; border: 0;
-  filter: grayscale(1) contrast(0.92) brightness(1.04);
 }
 @media (min-width: 45rem) {
   .map iframe { aspect-ratio: 21 / 9; max-height: 60vh; }
