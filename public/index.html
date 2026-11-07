@@ -13,7 +13,19 @@
 <site-header><a href="/">こむぎ舎</a></site-header>
 
 <main>
-  <!-- メイン写真：横幅3サイズ（800/1600/2400px、3:2）。差し替えは assets/img/ の同じ名前で上書き -->
+  <!--
+    小さなお店のホームの型（インスタから来た人が「来店」までたどる順番）
+    1. メイン写真（天地は細め）
+    2. 緊急のお知らせ（臨時休業など。あるときだけ出る）
+    3. お店のひとこと
+    4. 営業時間・定休日
+    5. アクセス（地図と住所）
+    6. お知らせ
+    7. パン教室
+    8. パンとお店のこと（下層ページへの入口）
+  -->
+
+  <!-- 1. メイン写真：横幅3サイズ（800/1600/2400px、元は3:2）。表示は天地を細めに切り抜く -->
   <figure class="hero-image">
     <img src="/assets/img/hero-1600.webp"
          srcset="/assets/img/hero-800.webp 800w, /assets/img/hero-1600.webp 1600w, /assets/img/hero-2400.webp 2400w"
@@ -22,12 +34,16 @@
   </figure>
 
   <div class="page">
+  <!-- 2. 緊急のお知らせ：管理画面の「緊急のお知らせ」に書いたときだけ表示される -->
+  <div data-news data-channel="urgent" data-count="3" data-style="alert" data-empty="hide" hidden></div>
+
+  <!-- 3. お店のひとこと -->
   <section class="hero">
     <h1>毎朝7時、<br>焼きたてから。</h1>
     <p>国産小麦と自家製酵母で焼く、町の小さなパン屋です。食パンと、日々のおやつパンを10種類ほど並べています。</p>
-    <a class="button" href="/menu.html">パンのご案内</a>
   </section>
 
+  <!-- 4. 営業時間・定休日 -->
   <section class="section" aria-labelledby="t-hours">
     <h2 class="section-title" id="t-hours">営業時間</h2>
     <dl class="info-list">
@@ -38,21 +54,39 @@
     <p class="sns-link"><a href="https://www.instagram.com/">今日のパンはInstagramで</a></p>
   </section>
 
+  <!-- 5. アクセス：見本は町田市役所。q= のあとを住所かお店の名前に書き換える -->
+  <section class="section" id="access" aria-labelledby="t-access">
+    <h2 class="section-title" id="t-access">アクセス</h2>
+    <dl class="info-list">
+      <div><dt>住所</dt><dd>○○市○○町1-2-3</dd></div>
+      <div><dt>最寄り駅</dt><dd>○○駅 北口から徒歩8分</dd></div>
+      <div><dt>駐車場</dt><dd>ありません。近くのコインパーキングをご利用ください</dd></div>
+    </dl>
+    <div class="map">
+      <iframe src="https://www.google.com/maps?q=町田市役所&amp;hl=ja&amp;z=16&amp;output=embed"
+              title="お店の場所の地図" loading="lazy" allowfullscreen
+              referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    </div>
+  </section>
+
+  <!-- 6. お知らせ -->
   <section class="section" aria-labelledby="t-news">
     <h2 class="section-title" id="t-news">お知らせ</h2>
     <div data-news data-channel="info" data-count="3" data-link="/news.html#{id}" data-more="/news.html"></div>
   </section>
 
+  <!-- 7. パン教室 -->
   <section class="section" aria-labelledby="t-event">
     <h2 class="section-title" id="t-event">パン教室</h2>
     <div data-news data-channel="event" data-count="2"></div>
   </section>
 
+  <!-- 8. 下層ページへの入口 -->
   <section class="section" aria-labelledby="t-pages">
-    <h2 class="section-title" id="t-pages">ご案内</h2>
+    <h2 class="section-title" id="t-pages">パンとお店のこと</h2>
     <ul class="child-pages">
-      <li><a href="/menu.html"><strong>パンのご案内</strong><span>定番のパンと、季節のパン</span></a></li>
-      <li><a href="/about.html"><strong>お店について</strong><span>アクセス・ご予約・お取り置き</span></a></li>
+      <li><a href="/menu.html"><strong>パンのご案内</strong><span>定番のパンと季節のパン、値段</span></a></li>
+      <li><a href="/about.html"><strong>お店について</strong><span>お取り置き・お支払い・お店のこと</span></a></li>
     </ul>
   </section>
   </div>

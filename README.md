@@ -66,11 +66,14 @@ mini-cms/
 
 | 属性 | 意味 | 例 |
 |---|---|---|
-| `data-channel` | チャンネル（お知らせの種類） | `info` / `event` |
+| `data-channel` | チャンネル（お知らせの種類） | `info` / `urgent` / `event` |
 | `data-count` | 件数 | `3` / `all` |
-| `data-style` | 見た目 | `compact`（日付＋タイトル）/ `full`（本文も） |
+| `data-style` | 見た目 | `compact`（日付＋タイトル）/ `full`（本文も）/ `alert`（緊急用の目立つ箱） |
 | `data-link` | タイトルのリンク先。`{id}` が記事IDになる | `/news.html#{id}` |
 | `data-more` | 「一覧へ」のリンク先 | `/news.html` |
+| `data-empty` | `hide` にすると、0件のとき何も出さない | `hide` |
+
+`data-style="alert"` と `data-empty="hide"` を組み合わせると、臨時休業などの「緊急のお知らせ」を、書いたときだけ目立つ箱で出せます。
 
 同じページに何個でも置けます。チャンネルは `public/news/config.php` で増やせます。
 

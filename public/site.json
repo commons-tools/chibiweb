@@ -5,6 +5,7 @@
   "menu": [
     { "label": "ホーム", "href": "/" },
     { "label": "パンのご案内", "href": "/menu.html" },
+    { "label": "アクセス", "href": "/#access" },
     { "label": "お店について", "href": "/about.html" },
     { "label": "お知らせ", "href": "/news.html" }
   ],

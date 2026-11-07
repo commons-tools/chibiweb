@@ -7,7 +7,8 @@
  *
  * data-channel : チャンネル名（省略時は最初のチャンネル）
  * data-count   : 件数。"all" で全件
- * data-style   : "compact"（日付＋タイトル）/ "full"（本文も表示）
+ * data-style   : "compact"（日付＋タイトル）/ "full"（本文も表示）/ "alert"（緊急のお知らせ用。目立つ箱で本文も表示）
+ * data-empty   : "hide" にすると、お知らせが0件のとき何も表示しない（緊急のお知らせ用）
  * data-more    : 「一覧へ」リンク先（compactのとき）
  * data-link    : タイトルからのリンク先。"{id}" が記事IDに置き換わる。例："/news.html#{id}"
  */
@@ -33,13 +34,16 @@
     var style = box.getAttribute('data-style') || 'compact';
     var linkTpl = box.getAttribute('data-link') || '';
     var more = box.getAttribute('data-more');
+    var showBody = style === 'full' || style === 'alert';
     box.innerHTML = '';
     box.classList.add('mini-news', 'mini-news--' + style);
 
     if (!data.items.length) {
+      if (box.getAttribute('data-empty') === 'hide') { box.hidden = true; return; }
       box.appendChild(el('p', 'mini-news__empty', 'お知らせはまだありません。'));
       return;
     }
+    box.hidden = false;
 
     var list = el('ul', 'mini-news__list');
     data.items.forEach(function (it) {
@@ -50,8 +54,8 @@
       li.appendChild(time);
 
       var href = it.link || (linkTpl ? linkTpl.replace('{id}', it.id) : '');
-      var title = el(style === 'full' ? 'h3' : 'span', 'mini-news__title');
-      if (href && style !== 'full') {
+      var title = el(style === 'full' ? 'h3' : (style === 'alert' ? 'strong' : 'span'), 'mini-news__title');
+      if (href && !showBody) {
         var a = el('a', null, it.title);
         a.href = href;
         title.appendChild(a);
@@ -60,7 +64,7 @@
       }
       li.appendChild(title);
 
-      if (style === 'full') {
+      if (showBody) {
         var body = el('div', 'mini-news__body');
         body.innerHTML = it.html; // サーバー側でエスケープ済み
         li.appendChild(body);
@@ -95,6 +99,7 @@
       .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(function (data) { render(box, data); })
       .catch(function () {
+        if (box.getAttribute('data-empty') === 'hide') { box.hidden = true; return; }
         box.innerHTML = '';
         box.appendChild(el('p', 'mini-news__empty', 'お知らせを読み込めませんでした。'));
       });

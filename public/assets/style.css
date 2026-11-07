@@ -182,14 +182,14 @@ site-footer { display: block; min-height: 64px; margin-top: calc(var(--space) * 
 /* ===== 7. トップページ ===== */
 /* メイン写真：画面の端から端まで。スマホは3:2、広い画面は横長に切り抜く */
 .hero-image { margin: 0; background: var(--c-surface); }
-.hero-image img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
+.hero-image img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; }
 @media (min-width: 45rem) {
-  .hero-image img { aspect-ratio: 16 / 7; max-height: 75vh; }
+  .hero-image img { aspect-ratio: 3 / 1; max-height: 50vh; }
 }
 .hero-image + .page .hero { padding-top: calc(var(--space) * 2.5); }
 .sns-link { margin: var(--space) 0 0; font-size: var(--fs-small); }
 .sns-link a::after { content: " →"; }
-.hero { padding: calc(var(--space) * 3.5) 0 calc(var(--space) * 3); }
+.hero { padding: calc(var(--space) * 2.5) 0 calc(var(--space) * 1); }
 .hero h1 { margin: 0; font-family: var(--font-head); font-size: var(--fs-h1); line-height: 1.35; font-weight: 700; letter-spacing: var(--tracking-head); }
 .hero p { margin: var(--space) 0 calc(var(--space) * 1.5); }
 .section { margin-top: calc(var(--space) * 3.5); }
@@ -211,6 +211,19 @@ site-footer { display: block; min-height: 64px; margin-top: calc(var(--space) * 
 .mini-news__more::after { content: " →"; }
 .mini-news__empty { color: var(--c-sub); }
 .mini-news:empty { min-height: 6rem; }   /* 読み込み中の場所取り */
+[data-empty="hide"]:empty { min-height: 0; }
+
+/* 緊急のお知らせ（data-style="alert"）：あるときだけ、目立つ箱で */
+.mini-news--alert { margin-top: calc(var(--space) * 1.5); }
+.mini-news--alert .mini-news__list { border: 0; display: grid; gap: calc(var(--space) * 0.5); }
+.mini-news--alert .mini-news__item {
+  padding: var(--space) calc(var(--space) * 1.25);
+  border: 0; border-left: 4px solid var(--c-accent); border-radius: 4px;
+  background: var(--c-accent-soft);
+}
+.mini-news--alert .mini-news__title { display: block; font-size: var(--fs-h4); }
+.mini-news--alert .mini-news__body { margin-top: 0.3em; }
+.mini-news--alert .mini-news__body p:last-child { margin-bottom: 0; }
 
 /* 縦書き（キャッチコピー用。使うかどうかは任意） */
 .tate { writing-mode: vertical-rl; text-orientation: mixed; }
