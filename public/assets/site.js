@@ -1,5 +1,5 @@
 /*!
- * ミニCMS kit — ヘッダー・フッター部品 v0.1.0-alpha
+ * chibiweb kit — ヘッダー・フッター部品 v0.1.0-alpha
  *
  *   <site-header><a href="/">サイト名</a></site-header>
  *   <site-footer></site-footer>

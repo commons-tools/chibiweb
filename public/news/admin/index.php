@@ -1,12 +1,12 @@
 <?php
 /**
- * ミニCMS 管理画面（1ファイル）
+ * chibiweb お知らせの管理画面（1ファイル）
  * はじめて開いたときにパスワードを決める。
  */
 declare(strict_types=1);
 require dirname(__DIR__) . '/lib.php';
 
-session_name('minicms');
+session_name('chibiweb');
 session_set_cookie_params(['httponly' => true, 'samesite' => 'Strict', 'secure' => !empty($_SERVER['HTTPS'])]);
 session_start();
 
@@ -256,7 +256,7 @@ textarea{min-height:220px}
       </ul>
     <?php endif ?>
   <?php endif ?>
-  <p class="hint">ミニCMS <?= h(MINI_VERSION) ?></p>
+  <p class="hint">chibiweb <?= h(MINI_VERSION) ?></p>
 </main>
 <?php endif ?>
 </body>

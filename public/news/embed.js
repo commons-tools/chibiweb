@@ -1,5 +1,5 @@
 /*!
- * ミニCMS 埋め込み部品 v0.1.0-alpha
+ * chibiweb お知らせの埋め込み部品 v0.1.0-alpha
  *
  * 使い方：
  *   <div data-news data-channel="info" data-count="3" data-style="compact" data-more="/news.html"></div>
