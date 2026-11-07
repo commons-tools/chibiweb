@@ -141,6 +141,10 @@ site-footer { display: block; min-height: 64px; margin-top: calc(var(--space) * 
   .info-list > div { display: grid; grid-template-columns: 9em 1fr; gap: var(--space); }
 }
 
+/* 地図（Googleマップの埋め込み）：横幅いっぱい、4:3を保つ */
+.map { margin-top: calc(var(--space) * 1.5); border-radius: var(--radius); overflow: hidden; background: var(--c-surface); }
+.map iframe { display: block; width: 100%; aspect-ratio: 4 / 3; border: 0; }
+
 /* 注意書きの箱 */
 .note { padding: var(--space) calc(var(--space) * 1.25); background: var(--c-accent-soft); border-radius: var(--radius); }
 .note > :first-child { margin-top: 0; }
