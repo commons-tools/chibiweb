@@ -2,7 +2,7 @@
 
 このサイトをAI（Claudeなど）に直してもらうときのルールです。
 AIは作業の前にこのファイルと `docs/DESIGN.md`、`docs/CONTENT.md` を読んでください。
-しくみの全体は `docs/HOW-IT-WORKS.md` にあります。
+しくみの全体は `docs/HOW-IT-WORKS.md`、このプロジェクトの考え方（なぜ小さいままでいるのか）は `docs/FOR-MAKERS.md` にあります。
 
 ## フォルダ
 
