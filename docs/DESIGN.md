@@ -88,7 +88,7 @@
 | ボタン | `<a class="button">` / `class="button ghost"` | 1画面に主ボタン1つまで |
 | 子ページの入口 | `<ul class="child-pages">` | 親ページの最後 |
 | 画像 | `<figure><img alt="…"><figcaption>` | `alt` は必ず書く |
-| 地図 | `<div class="map"><iframe …></div>` の下に `<a class="button ghost">Googleマップで道順を見る</a>` | アクセスの情報リストのすぐ下。埋め込みは見る用、ボタンは道案内用。iframe の `width` `height` `style` は消して、`title` と `loading="lazy"` をつける |
+| 地図 | `<div class="map"><iframe …></div>` の下に `<a class="button ghost">Googleマップで道順を見る</a>` | アクセスの情報リストのすぐ下。埋め込みは見る用、ボタンは道案内用。iframe の `width` `height` `style` は消して、`title` と `loading="lazy"` をつける。場所は `https://www.google.com/maps?q=住所や施設名&output=embed` の形でも書ける |
 | 縦書き | `class="tate"` | キャッチコピーなど短い言葉だけ。本文には使わない |
 
 この一覧にない部品が必要になったら、作る前に相談する（Issueに書く）。
