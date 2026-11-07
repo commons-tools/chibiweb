@@ -143,17 +143,13 @@ site-footer { display: block; min-height: 64px; margin-top: calc(var(--space) * 
 }
 
 /* 地図（Googleマップの埋め込み）
-   - 本文の幅を飛び出して、画面の端から端まで */
-.map {
-  width: 100vw;
-  margin: calc(var(--space) * 1.5) 0 0 calc(50% - 50vw);
-  background: var(--c-surface);
-}
-.map iframe {
-  display: block; width: 100%; aspect-ratio: 4 / 3; border: 0;
-}
+   - ふつうは本文のカラム幅いっぱい、4:3
+   - .map--wide をつけると、画面の端から端まで（広い画面では横長） */
+.map { margin-top: calc(var(--space) * 1.5); border-radius: var(--radius); overflow: hidden; background: var(--c-surface); }
+.map iframe { display: block; width: 100%; aspect-ratio: 4 / 3; border: 0; }
+.map--wide { width: 100vw; margin-left: calc(50% - 50vw); border-radius: 0; }
 @media (min-width: 45rem) {
-  .map iframe { aspect-ratio: 21 / 9; max-height: 60vh; }
+  .map--wide iframe { aspect-ratio: 21 / 9; max-height: 60vh; }
 }
 
 /* 注意書きの箱 */
