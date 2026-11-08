@@ -35,21 +35,21 @@ HTMLは、どのページも同じクラス名（`.page`、`.section`、`.prose`
 
 | 変数 | 決めるもの |
 |---|---|
-| `--c-ink` | 文字の色 |
-| `--c-sub` | 補足の文字（日付・注釈）の色 |
-| `--c-bg` | 背景の色 |
-| `--c-surface` | カード・表・地図の背景 |
-| `--c-line` | 罫線の色 |
-| `--c-accent` | リンク・ボタン・強調の色（1色） |
-| `--c-accent-soft` | 緊急のお知らせ・注意書きの箱の背景 |
+| `--color-text` | 文字の色 |
+| `--color-text-sub` | 補足の文字（日付・注釈）の色 |
+| `--color-bg` | 背景の色 |
+| `--color-surface` | カード・表・地図の背景 |
+| `--color-line` | 罫線の色 |
+| `--color-accent` | リンク・ボタン・強調の色（1色） |
+| `--color-accent-soft` | 緊急のお知らせ・注意書きの箱の背景 |
 | `--font-body` | 本文の書体 |
 | `--font-head` | 見出しの書体（いまは本文と同じゴシック。明朝にしたいならここ） |
-| `--fs-h1` 〜 `--fs-small` | 文字の大きさ（見出し4段階＋本文＋小さい文字） |
-| `--tracking-head` / `--tracking-body` | 字間（見出し・本文） |
+| `--font-size-h1` 〜 `--font-size-small` | 文字の大きさ（見出し4段階＋本文＋小さい文字） |
+| `--letter-spacing-head` / `--letter-spacing-body` | 字間（見出し・本文） |
 | `--space` | 余白の単位。すべての余白はこの倍数 |
-| `--width` | 本文の最大幅（いまは全角約40字） |
+| `--content-width` | 本文の最大幅（いまは全角約40字） |
 | `--radius` | 角丸の大きさ（カード、地図など） |
-| `--header-h` | ヘッダーの高さ |
+| `--header-height` | ヘッダーの高さ |
 
 色を変えたら、文字と背景の色の差が十分あるか（WCAG AA、4.5:1以上）を確かめてください。
 
