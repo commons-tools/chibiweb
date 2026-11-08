@@ -149,6 +149,8 @@ textarea{min-height:220px}
 .row{display:flex;gap:12px}.row>*{flex:1}
 .actions{display:flex;justify-content:space-between;gap:8px;margin-top:20px;flex-wrap:wrap}
 .hint{font-size:13px;color:var(--sub)}
+.pw{display:flex;gap:8px}.pw input{flex:1}
+.pw-toggle{flex:none;padding:0 14px;border:1px solid var(--line);border-radius:8px;background:#fff;font:inherit;font-size:14px;color:var(--sub);cursor:pointer}
 .empty{color:var(--sub);text-align:center;padding:32px 0}
 </style>
 </head>
@@ -172,8 +174,9 @@ textarea{min-height:220px}
     <input type="hidden" name="action" value="setup">
     <label for="sk">合言葉（config.php の setup_key）</label>
     <input id="sk" type="password" name="setup_key" autocomplete="off" required>
+    <input type="text" name="username" value="admin" autocomplete="username" hidden>
     <label for="pw">パスワード</label>
-    <input id="pw" type="password" name="password" autocomplete="new-password" required>
+    <div class="pw"><input id="pw" type="password" name="password" autocomplete="new-password" required><button type="button" class="pw-toggle" aria-controls="pw">表示</button></div>
     <p><button class="btn">決定</button></p>
   </form>
 </main>
@@ -186,8 +189,9 @@ textarea{min-height:220px}
   <form method="post">
     <input type="hidden" name="csrf" value="<?= h($csrf) ?>">
     <input type="hidden" name="action" value="login">
+    <input type="text" name="username" value="admin" autocomplete="username" hidden>
     <label for="pw">パスワード</label>
-    <input id="pw" type="password" name="password" autocomplete="current-password" required autofocus>
+    <div class="pw"><input id="pw" type="password" name="password" autocomplete="current-password" required autofocus><button type="button" class="pw-toggle" aria-controls="pw">表示</button></div>
     <p><button class="btn">ログイン</button></p>
   </form>
 </main>
@@ -275,5 +279,16 @@ textarea{min-height:220px}
   <p class="hint">chibiweb <?= h(MINI_VERSION) ?></p>
 </main>
 <?php endif ?>
+<script>
+// パスワードの表示・非表示を切り替える（ユーザー名は不要。パスワード管理アプリ向けに「admin」を隠して送っている）
+document.querySelectorAll('.pw-toggle').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var i = document.getElementById(b.getAttribute('aria-controls'));
+    var show = i.type === 'password';
+    i.type = show ? 'text' : 'password';
+    b.textContent = show ? '隠す' : '表示';
+  });
+});
+</script>
 </body>
 </html>
