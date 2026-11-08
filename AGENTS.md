@@ -4,6 +4,8 @@
 AIは作業の前にこのファイルと `docs/DESIGN.md`、`docs/CONTENT.md` を読んでください。
 しくみの全体は `docs/HOW-IT-WORKS.md`、このプロジェクトの考え方（なぜ小さいままでいるのか）は `docs/FOR-MAKERS.md`、お知らせのしくみの仕様は `docs/FOR-ENGINEERS.md` にあります。
 
+説明書を1枚にまとめた `docs/chibiweb-all.md` もあります（各mdをつなげたもの）。**`docs/` のmdを直したら、`chibiweb-all.md` も作り直すこと。**
+
 ## フォルダ
 
 - `public/`：サーバーに上げるもの。サイトの本体はすべてここ

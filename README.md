@@ -47,6 +47,7 @@ chibiweb/
 │   ├─ FOR-MAKERS.md    サイトを預かる人へ（このプロジェクトの考え方）
 │   ├─ FOR-DESIGNERS.md 自分のテーマをつくる人へ
 │   ├─ FOR-ENGINEERS.md フォーク・改造するエンジニアへ（仕様書）
+│   ├─ chibiweb-all.md  説明書の全部入り（AIに1枚で読ませたいとき用）
 │   ├─ HOW-IT-WORKS.md  しくみの解説（画像つき）
 │   ├─ DESIGN.md        デザインのルール
 │   ├─ CONTENT.md       ページ一覧と文章のルール
