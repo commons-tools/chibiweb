@@ -181,7 +181,8 @@ GET api.php?channel=info&id=2026-11-07-a1b2c3
 
 ### 認証
 
-- ユーザーは1人だけ。パスワードのハッシュ（`password_hash` / `PASSWORD_DEFAULT`）を `data/.auth.php` に保存
+- ユーザーは1人だけ。パスワードのハッシュ（`password_hash` / `PASSWORD_DEFAULT`、`cost` 12）を `data/.auth.php` に保存。PHPのバージョンにかかわらず強さ12（PHP 8.4 からの標準と同じ）
+- ログイン成功時に `password_needs_rehash` で確かめ、前の強さで保存されたハッシュは今の強さで作り直す
 - `.auth.php` がないときは「はじめに」の画面になる。`config.php` の `setup_key` と一致する合言葉を入れた人だけがパスワードを決められる。`setup_key` が空なら、決められない
 - パスワードは10文字以上
 - ログインに失敗したとき、合言葉をまちがえたときは、2秒待たせる（簡易的な総当たり対策）
@@ -229,6 +230,8 @@ GET api.php?channel=info&id=2026-11-07-a1b2c3
 - フッターは `Copyright © 年 copyright` を出す。年は自動
 
 ## 8. セキュリティについて知っておくこと
+
+使う人向けの説明は [SECURITY.md](SECURITY.md) にあります。弱点の報告先もそこに書いてあります。
 
 - `data/` は `.htaccess` で外から読めないようにしている。nginxなどでは、同じことを設定で行うこと（README参照）
 - `.auth.php` は `.php` なので、万一アクセスされても中身は表示されない

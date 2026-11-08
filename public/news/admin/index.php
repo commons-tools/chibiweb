@@ -25,6 +25,11 @@ function check_csrf(): void {
         exit('送信の確認に失敗しました。ページを読み込み直してください。');
     }
 }
+// パスワードのハッシュ（bcrypt）。強さ12は、PHP 8.4 からの標準と同じ。くわしくは docs/SECURITY.md
+const MINI_HASH_OPTIONS = ['cost' => 12];
+function save_auth(string $file, string $pw): void {
+    file_put_contents($file, '<?php return ' . var_export(['hash' => password_hash($pw, PASSWORD_DEFAULT, MINI_HASH_OPTIONS)], true) . ';', LOCK_EX);
+}
 function go(string $q = ''): never {
     header('Location: ./' . ($q ? '?' . $q : ''));
     exit;
@@ -45,7 +50,7 @@ if ($action === 'setup' && !$hasAuth) {
     } elseif (mb_strlen($pw) < 10) {
         $msg = 'パスワードは10文字以上にしてください。';
     } else {
-        file_put_contents($authFile, '<?php return ' . var_export(['hash' => password_hash($pw, PASSWORD_DEFAULT)], true) . ';');
+        save_auth($authFile, $pw);
         $_SESSION['chibiweb_ok'] = true;
         session_regenerate_id(true);
         go();
@@ -54,7 +59,10 @@ if ($action === 'setup' && !$hasAuth) {
 if ($action === 'login' && $hasAuth) {
     check_csrf();
     $auth = require $authFile;
-    if (password_verify((string) ($_POST['password'] ?? ''), $auth['hash'])) {
+    $pw   = (string) ($_POST['password'] ?? '');
+    if (password_verify($pw, $auth['hash'])) {
+        // 前の強さで保存されたハッシュは、ログインのついでに今の強さで作り直す
+        if (password_needs_rehash($auth['hash'], PASSWORD_DEFAULT, MINI_HASH_OPTIONS)) save_auth($authFile, $pw);
         $_SESSION['chibiweb_ok'] = true;
         session_regenerate_id(true);
         go();

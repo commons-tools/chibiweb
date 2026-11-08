@@ -17,6 +17,7 @@ chibiwebには、2つの約束があります。
 > - [chibiwebで、小さなお店のサイトを預かる人へ](docs/FOR-MAKERS.md)：ソフトウェアの中には書けない、使い方の考え方
 > - [chibiwebで、自分のテーマをつくる人へ](docs/FOR-DESIGNERS.md)：どのファイルのどこを直せば、オリジナルのテーマがつくれるか
 > - [chibiwebをフォーク・改造するエンジニアへ](docs/FOR-ENGINEERS.md)：お知らせのしくみの仕様書（データ形式、設定、API、部品）
+> - [chibiwebの安全のしくみ](docs/SECURITY.md)：何を守っていて、何を守っていないか。弱点を見つけたときの連絡先
 
 > これはα版です。仕様は変わります。試して、気づいたことを教えてください。参加のしかたは [CONTRIBUTING.md](CONTRIBUTING.md) へ。
 
@@ -47,6 +48,7 @@ chibiweb/
 │   ├─ FOR-MAKERS.md    サイトを預かる人へ（このプロジェクトの考え方）
 │   ├─ FOR-DESIGNERS.md 自分のテーマをつくる人へ
 │   ├─ FOR-ENGINEERS.md フォーク・改造するエンジニアへ（仕様書）
+│   ├─ SECURITY.md      安全のしくみ
 │   ├─ chibiweb-all.md  説明書の全部入り（AIに1枚で読ませる用。public/ と一緒に渡す）
 │   ├─ HOW-IT-WORKS.md  しくみの解説（画像つき）
 │   ├─ DESIGN.md        デザインのルール
@@ -82,7 +84,7 @@ chibiweb/
 
 ### パスワードについて
 
-- パスワードは `public/news/data/.auth.php` に保存されます。暗号化ではなく、元に戻せない形（ハッシュ。PHP標準の `password_hash`）に変換して保存しているので、このファイルを見ても元のパスワードはわかりません
+- パスワードは `public/news/data/.auth.php` に保存されます。暗号化ではなく、元に戻せない形（ハッシュ。PHP標準の `password_hash`、bcrypt の強さ12）に変換して保存しているので、このファイルを見ても元のパスワードはわかりません。くわしくは [安全のしくみ](docs/SECURITY.md) へ
 - 合言葉（setup_key）は、**最初にパスワードを決めるときだけ**使います。合言葉を知らない人は、パスワードを決められません
 - パスワードを忘れたら、サーバーの `.auth.php` を削除してください。もう一度、合言葉とパスワードを入れる画面になります
 - サイトを別のサーバーやサブドメインに引っ越すとき、`.auth.php` も一緒にコピーすれば、同じパスワードのまま使えます
@@ -163,6 +165,7 @@ status: published
   location ^~ /news/data/ { deny all; }
   ```
 - 総当たり対策は簡易的です。管理画面のURLを推測されにくい名前に変えるのもおすすめです
+- 安全のしくみと、弱点を見つけたときの連絡先は [docs/SECURITY.md](docs/SECURITY.md) にあります
 
 ## 参加する
 
