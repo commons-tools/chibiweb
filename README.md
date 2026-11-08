@@ -16,6 +16,7 @@ chibiwebには、2つの約束があります。
 > **はじめに読んでほしいもの**
 > - [chibiwebで、小さなお店のサイトを預かる人へ](docs/FOR-MAKERS.md)：ソフトウェアの中には書けない、使い方の考え方
 > - [chibiwebで、自分のテーマをつくる人へ](docs/FOR-DESIGNERS.md)：どのファイルのどこを直せば、オリジナルのテーマがつくれるか
+> - [chibiwebをフォーク・改造するエンジニアへ](docs/FOR-ENGINEERS.md)：お知らせのしくみの仕様書（データ形式、設定、API、部品）
 
 > これはα版です。仕様は変わります。試して、気づいたことを教えてください。参加のしかたは [CONTRIBUTING.md](CONTRIBUTING.md) へ。
 
@@ -45,6 +46,7 @@ chibiweb/
 ├─ docs/                ← 説明（サーバーには上げない）
 │   ├─ FOR-MAKERS.md    サイトを預かる人へ（このプロジェクトの考え方）
 │   ├─ FOR-DESIGNERS.md 自分のテーマをつくる人へ
+│   ├─ FOR-ENGINEERS.md フォーク・改造するエンジニアへ（仕様書）
 │   ├─ HOW-IT-WORKS.md  しくみの解説（画像つき）
 │   ├─ DESIGN.md        デザインのルール
 │   ├─ CONTENT.md       ページ一覧と文章のルール
