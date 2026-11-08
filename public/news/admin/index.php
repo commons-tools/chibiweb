@@ -13,7 +13,7 @@ session_start();
 $cfg      = mini_config();
 $authFile = MINI_DATA . '/.auth.php';
 $hasAuth  = is_file($authFile);
-$logged   = !empty($_SESSION['minicms_ok']);
+$logged   = !empty($_SESSION['chibiweb_ok']);
 $msg      = '';
 
 if (empty($_SESSION['csrf'])) $_SESSION['csrf'] = bin2hex(random_bytes(16));
@@ -33,14 +33,20 @@ function go(string $q = ''): never {
 $action = $_POST['action'] ?? $_GET['action'] ?? '';
 
 /* ---------- パスワード設定・ログイン ---------- */
+$setupKey = trim((string) ($cfg['setup_key'] ?? ''));
 if ($action === 'setup' && !$hasAuth) {
     check_csrf();
     $pw = (string) ($_POST['password'] ?? '');
-    if (mb_strlen($pw) < 10) {
+    if ($setupKey === '') {
+        $msg = 'config.php の setup_key（合言葉）が設定されていません。';
+    } elseif (!hash_equals($setupKey, (string) ($_POST['setup_key'] ?? ''))) {
+        sleep(2); // 総当たり対策（簡易）
+        $msg = '合言葉が違います。';
+    } elseif (mb_strlen($pw) < 10) {
         $msg = 'パスワードは10文字以上にしてください。';
     } else {
         file_put_contents($authFile, '<?php return ' . var_export(['hash' => password_hash($pw, PASSWORD_DEFAULT)], true) . ';');
-        $_SESSION['minicms_ok'] = true;
+        $_SESSION['chibiweb_ok'] = true;
         session_regenerate_id(true);
         go();
     }
@@ -49,7 +55,7 @@ if ($action === 'login' && $hasAuth) {
     check_csrf();
     $auth = require $authFile;
     if (password_verify((string) ($_POST['password'] ?? ''), $auth['hash'])) {
-        $_SESSION['minicms_ok'] = true;
+        $_SESSION['chibiweb_ok'] = true;
         session_regenerate_id(true);
         go();
     }
@@ -148,14 +154,24 @@ textarea{min-height:220px}
 </head>
 <body>
 
-<?php if (!$hasAuth): ?>
+<?php if (!$hasAuth && $setupKey === ''): ?>
 <main>
   <h1>はじめに</h1>
-  <p>管理画面のパスワードを決めてください（10文字以上）。</p>
+  <p>まだパスワードを決められません。</p>
+  <p>サーバーの <code>news/config.php</code> を開き、<code>'setup_key' =&gt; ''</code> の <code>''</code> の中に、自分だけが知っている合言葉を書いてアップロードしてください。そのあと、このページを開き直すと、パスワードを決められます。</p>
+  <p class="hint">知らない人に先にパスワードを決められないようにするためのしくみです。</p>
+</main>
+
+<?php elseif (!$hasAuth): ?>
+<main>
+  <h1>はじめに</h1>
+  <p><code>config.php</code> に書いた合言葉と、これから使う管理画面のパスワード（10文字以上）を入れてください。</p>
   <?php if ($msg): ?><p class="msg err"><?= h($msg) ?></p><?php endif ?>
   <form method="post">
     <input type="hidden" name="csrf" value="<?= h($csrf) ?>">
     <input type="hidden" name="action" value="setup">
+    <label for="sk">合言葉（config.php の setup_key）</label>
+    <input id="sk" type="password" name="setup_key" autocomplete="off" required>
     <label for="pw">パスワード</label>
     <input id="pw" type="password" name="password" autocomplete="new-password" required>
     <p><button class="btn">決定</button></p>
