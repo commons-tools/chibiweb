@@ -73,6 +73,7 @@ status: published
 本文
 ```
 
-- ファイル名は `YYYY-MM-DD-xxxxxx.md`（xxxxxx は英小文字と数字6文字）
+- ファイル名は `YYYY-MM-DD-xxxxxx.md`（xxxxxx は英小文字と数字**ちょうど6文字**。例：`2026-11-07-a1b2c3.md`）
+- **`info01` `urgent01` のような名前は、6文字でないので無視されて表示されない**
 - 本文で使えるのは：段落、**太字**、[リンク](URL)、「- 」の箇条書きだけ
 - 公開してよいか迷うものは `status: draft` にしておく
