@@ -17,6 +17,7 @@ chibiwebには、2つの約束があります。
 > - [chibiwebで、小さなお店のサイトを預かる人へ](docs/FOR-MAKERS.md)：ソフトウェアの中には書けない、使い方の考え方
 > - [chibiwebで、自分のテーマをつくる人へ](docs/FOR-DESIGNERS.md)：どのファイルのどこを直せば、オリジナルのテーマがつくれるか
 > - [chibiwebをフォーク・改造するエンジニアへ](docs/FOR-ENGINEERS.md)：お知らせのしくみの仕様書（データ形式、設定、API、部品）
+> - [手順書：お客さんのサイトを作って納品するまで](docs/RUNBOOK.md)：ヒアリングから納品まで、だれでも同じように作れる手順とチェックリスト
 > - [chibiwebの安全のしくみ](docs/SECURITY.md)：何を守っていて、何を守っていないか。弱点を見つけたときの連絡先
 
 > これはα版です。仕様は変わります。試して、気づいたことを教えてください。参加のしかたは [CONTRIBUTING.md](CONTRIBUTING.md) へ。
@@ -48,6 +49,7 @@ chibiweb/
 │   ├─ FOR-MAKERS.md    サイトを預かる人へ（このプロジェクトの考え方）
 │   ├─ FOR-DESIGNERS.md 自分のテーマをつくる人へ
 │   ├─ FOR-ENGINEERS.md フォーク・改造するエンジニアへ（仕様書）
+│   ├─ RUNBOOK.md       手順書（ヒアリングから納品まで）
 │   ├─ SECURITY.md      安全のしくみ
 │   ├─ chibiweb-all.md  説明書の全部入り（AIに1枚で読ませる用。public/ と一緒に渡す）
 │   ├─ HOW-IT-WORKS.md  しくみの解説（画像つき）

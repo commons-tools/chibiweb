@@ -2,7 +2,7 @@
 
 このサイトをAI（Claudeなど）に直してもらうときのルールです。
 AIは作業の前にこのファイルと `docs/DESIGN.md`、`docs/CONTENT.md` を読んでください。
-しくみの全体は `docs/HOW-IT-WORKS.md`、このプロジェクトの考え方（なぜ小さいままでいるのか）は `docs/FOR-MAKERS.md`、お知らせのしくみの仕様は `docs/FOR-ENGINEERS.md`、安全のしくみは `docs/SECURITY.md` にあります。
+しくみの全体は `docs/HOW-IT-WORKS.md`、このプロジェクトの考え方（なぜ小さいままでいるのか）は `docs/FOR-MAKERS.md`、お知らせのしくみの仕様は `docs/FOR-ENGINEERS.md`、安全のしくみは `docs/SECURITY.md`、お客さんのサイトを作って納品するまでの手順は `docs/RUNBOOK.md` にあります。
 
 説明書を1枚にまとめた `docs/chibiweb-all.md` もあります（各mdをつなげたもの）。**`docs/` のmdを直したら、`chibiweb-all.md` も作り直すこと。**
 
