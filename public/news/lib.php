@@ -40,7 +40,10 @@ function mini_parse(string $text): array {
     if (preg_match('/^---\R(.*?)\R---\R?(.*)$/su', $text, $m)) {
         foreach (preg_split('/\R/u', $m[1]) as $line) {
             if (preg_match('/^([a-z_]+):\s*(.*)$/u', $line, $mm)) {
-                $meta[$mm[1]] = trim($mm[2], " \"'");
+                $v = trim($mm[2]);
+                // 引用符は、値の全体が同じ引用符の組で囲まれているときだけ外す（"春のパン"まつり は残す）
+                if (preg_match('/^(["\'])(.*)\1$/su', $v, $q)) $v = $q[2];
+                $meta[$mm[1]] = $v;
             }
         }
         $body = $m[2];
@@ -70,7 +73,7 @@ function mini_list(string $channel, bool $includeHidden = false): array {
             'id'     => $id,
             'date'   => $meta['date'] ?? substr($id, 0, 10),
             'title'  => $meta['title'] ?? '(無題)',
-            'link'   => $meta['link'] ?? '',
+            'link'   => mini_safe_url($meta['link'] ?? ''), // mdを手で書いた場合も、出すときに確かめる
             'status' => $meta['status'] ?? 'published',
             'body'   => $body,
         ];
@@ -82,6 +85,14 @@ function mini_list(string $channel, bool $includeHidden = false): array {
     }
     usort($items, fn($a, $b) => strcmp($b['date'] . $b['id'], $a['date'] . $a['id']));
     return $items;
+}
+
+/**
+ * リンクに使ってよいURLだけを通す。合わないもの（javascript: など）は空文字にする。
+ * 使ってよいのは http:// https:// / ./ ../ # mailto: で始まるもの。本文のリンクと「リンク先」で共用する
+ */
+function mini_safe_url(string $url): string {
+    return preg_match('#^(https?://|/|\./|\.\./|\#|mailto:)#', $url) ? $url : '';
 }
 
 function h(string $s): string {
@@ -118,7 +129,7 @@ function mini_inline(string $s): string {
     $s = preg_replace('/\*\*(.+?)\*\*/u', '<strong>$1</strong>', $s);
     $s = preg_replace_callback('/\[([^\]]+)\]\(([^)\s]+)\)/u', function ($m) {
         $url = html_entity_decode($m[2], ENT_QUOTES, 'UTF-8');
-        if (!preg_match('#^(https?://|/|\./|\.\./|\#|mailto:)#', $url)) return $m[1];
+        if (mini_safe_url($url) === '') return $m[1];
         return '<a href="' . h($url) . '">' . $m[1] . '</a>';
     }, $s);
     return $s;
