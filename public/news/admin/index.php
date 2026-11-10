@@ -13,7 +13,11 @@ session_start();
 $cfg      = mini_config();
 $authFile = MINI_DATA . '/.auth.php';
 $hasAuth  = is_file($authFile);
-$logged   = !empty($_SESSION['chibiweb_ok']);
+// ログインの印は「このサイトの、このパスワード」に結びつける（同じサーバーの別のchibiwebでは通らない）
+function login_mark(string $file): string {
+    return is_file($file) ? hash('sha256', $file . '|' . (string) file_get_contents($file)) : '';
+}
+$logged   = $hasAuth && hash_equals(login_mark($authFile), (string) ($_SESSION['chibiweb_ok'] ?? ''));
 $msg      = '';
 
 if (empty($_SESSION['csrf'])) $_SESSION['csrf'] = bin2hex(random_bytes(16));
@@ -51,7 +55,7 @@ if ($action === 'setup' && !$hasAuth) {
         $msg = 'パスワードは10文字以上にしてください。';
     } else {
         save_auth($authFile, $pw);
-        $_SESSION['chibiweb_ok'] = true;
+        $_SESSION['chibiweb_ok'] = login_mark($authFile);
         session_regenerate_id(true);
         go();
     }
@@ -63,7 +67,7 @@ if ($action === 'login' && $hasAuth) {
     if (password_verify($pw, $auth['hash'])) {
         // 前の強さで保存されたハッシュは、ログインのついでに今の強さで作り直す
         if (password_needs_rehash($auth['hash'], PASSWORD_DEFAULT, MINI_HASH_OPTIONS)) save_auth($authFile, $pw);
-        $_SESSION['chibiweb_ok'] = true;
+        $_SESSION['chibiweb_ok'] = login_mark($authFile);
         session_regenerate_id(true);
         go();
     }
@@ -90,7 +94,7 @@ if ($logged && $action === 'save') {
     $meta = [
         'date'   => $date,
         'title'  => trim((string) ($_POST['title'] ?? '')) ?: '(無題)',
-        'link'   => trim((string) ($_POST['link'] ?? '')),
+        'link'   => mini_safe_url(trim((string) ($_POST['link'] ?? ''))),
         'status' => ($_POST['status'] ?? '') === 'draft' ? 'draft' : 'published',
     ];
     file_put_contents($dir . '/' . $id . '.md', mini_serialize($meta, (string) ($_POST['body'] ?? '')), LOCK_EX);
